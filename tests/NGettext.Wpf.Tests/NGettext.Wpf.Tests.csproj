@@ -31,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NGettext.Wpf\NGettext.Wpf.csproj" />
+        <ProjectReference Include="..\..\src\NGettext.Wpf\NGettext.Wpf.csproj" />
         <ProjectReference Include="..\NGettext.Wpf.Asserts\NGettext.Wpf.Asserts.csproj" />
     </ItemGroup>
 
