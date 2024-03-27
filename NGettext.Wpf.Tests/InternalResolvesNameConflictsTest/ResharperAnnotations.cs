@@ -1,4 +1,6 @@
-﻿/* MIT License
+﻿// TODO: ditto along similar lines as with Xunit.Assert replacements
+// TODO: why do we need this, exactly (?)
+/* MIT License
 
 Copyright (c) 2016 JetBrains http://www.jetbrains.com
 
@@ -22,7 +24,8 @@ SOFTWARE. */
 
 using System;
 
-#pragma warning disable 1591
+//// TODO: probably an artifact of JetBrains R# having been introduced
+// #pragma warning disable 1591
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -33,12 +36,20 @@ using System;
 // ReSharper disable once CheckNamespace
 namespace JetBrains.Annotations
 {
-    [AttributeUsage(
-      AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-      AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event |
-      AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
-    internal sealed class NotNullAttribute : Attribute { }
+    // TODO: so the thing is, JetBrains R# did provide some 'helpers'
+    // TODO: but with the C# revisions, these are probably unnecessary
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    //[AttributeUsage(
+    //  AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
+    //  AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event |
+    //  AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
+    //internal sealed class NotNullAttribute : Attribute
+    //{
+    //}
 
+    // TODO: this one may be unnecessary as well, we'll see...
     /// <summary>
     /// Indicates that the marked method builds string by format pattern and (optional) arguments.
     /// Parameter, which contains format string, should be given in constructor. The format string
@@ -60,11 +71,16 @@ namespace JetBrains.Annotations
         /// <param name="formatParameterName">
         /// Specifies which parameter of an annotated method should be treated as format-string
         /// </param>
+#pragma warning disable IDE0290 // Use primary constructor
         public StringFormatMethodAttribute([NotNull] string formatParameterName)
         {
             FormatParameterName = formatParameterName;
         }
 
-        [NotNull] public string FormatParameterName { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [NotNull]
+        public string FormatParameterName { get; private set; }
     }
 }

@@ -1,32 +1,49 @@
 ﻿using System.Windows.Data;
-using NGettext.Wpf.Common;
-using NSubstitute;
-using Xunit;
 
-namespace NGettext.Wpf.Tests.Common
+namespace NGettext.Wpf.Common
 {
+    using NSubstitute;
+    using Xunit;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class GettextStringFormatConverterTest
     {
-        private IValueConverter _target;
+        /// <summary>
+        /// 
+        /// </summary>
+#pragma warning disable CA1859 // Use concrete types when possible for improved performance
+        private readonly IValueConverter _target;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public GettextStringFormatConverterTest()
         {
             _target = new GettextStringFormatConverter("MSGID {0}");
             GettextStringFormatConverter.Localizer = Substitute.For<ILocalizer>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Fact]
-        public void Convert_Formats_Value_With_Translated_MsgId()
+        public void Convert_Formats_Value_With_Localized_MsgId()
         {
             var value = "SOME VALUE";
             GettextStringFormatConverter.Localizer.Catalog.GetString(Arg.Is("MSGID {0}"), Arg.Is(value))
                 .Returns("FORMATTED TRANSLATION");
 
-            Assert.Equal("FORMATTED TRANSLATION", _target.Convert(value, null, null, null));
+            var actual = _target.Convert(value, null, null, null);
+            Assert.Equal("FORMATTED TRANSLATION", actual);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Fact]
-        public void Convert_Formats_Value_With_Translated_MsgId_Using_Translation_Context()
+        public void Convert_Formats_Value_With_Localized_MsgId_Using_Localization_Context()
         {
             var target = new GettextStringFormatConverter("CTX|MSGID {0}");
 
@@ -34,26 +51,36 @@ namespace NGettext.Wpf.Tests.Common
             GettextStringFormatConverter.Localizer.Catalog.GetParticularString(Arg.Is("CTX"), Arg.Is("MSGID {0}"), Arg.Is(value))
                 .Returns("FORMATTED TRANSLATION");
 
-            Assert.Equal("FORMATTED TRANSLATION", target.Convert(value, null, null, null));
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+            var actual = target.Convert(value, null, null, null);
+            Assert.Equal("FORMATTED TRANSLATION", actual);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Fact]
-        public void Convert_Falls_Back_To_Formats_Value_With_Untranslated_MsgId()
+        public void Convert_Falls_Back_To_Formats_Value_With_Unlocalized_MsgId()
         {
             var value = "SOME VALUE";
             GettextStringFormatConverter.Localizer = null;
 
-            Assert.Equal("MSGID SOME VALUE", _target.Convert(value, null, null, null));
+            var actual = _target.Convert(value, null, null, null);
+            Assert.Equal("MSGID SOME VALUE", actual);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Fact]
-        public void Convert_Falls_Back_To_Formats_Value_With_Untranslated_MsgId_Stripping_Context()
+        public void Convert_Falls_Back_To_Formats_Value_With_Unlocalized_MsgId_Stripping_Context()
         {
-            var target = new GettextStringFormatConverter("CTX|MSGID {0}");
+            GettextStringFormatConverter target = new("CTX|MSGID {0}");
             var value = "SOME VALUE";
             GettextStringFormatConverter.Localizer = null;
 
-            Assert.Equal("MSGID SOME VALUE", target.Convert(value, null, null, null));
+            var actual = target.Convert(value, null, null, null);
+            Assert.Equal("MSGID SOME VALUE", actual);
         }
     }
 }
