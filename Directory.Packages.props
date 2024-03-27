@@ -1,0 +1,13 @@
+<Project>
+
+    <!-- TODO: define nuget configuration, we want the packages to land in common solution folder -->
+    <!-- TODO: not sure the overall benefit of centralizing package version management however -->
+    <PropertyGroup>
+        <!--<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>-->
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+</Project>

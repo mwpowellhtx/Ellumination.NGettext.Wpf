@@ -1,13 +1,21 @@
 # ngettext-wpf
-Proper internationalization support for WPF (via NGettext)
+Proper internationalization (i18n) support for WPF (via NGettext)
 
-See the change history <a href="CHANGELOG.md">here</a>, including whats new in the latest release and what will be included in the upcomming release.
+Review the <a href="CHANGELOG.md">change history</a>, including whats new in the latest release and what will be included in the upcomming release.
+
+[//]: <> (TODO: Lookup shields.io badges for nuget package versions, etc.)
+[//]: <> (TODO: Could also perhaps automate not only build but also unit tests passing/failing.)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/s344j6n3gpvjxjof?svg=true)](https://ci.appveyor.com/project/robert-j-engdahl/ngettext-wpf)
 
 ![LGPL](https://www.gnu.org/graphics/lgplv3-88x31.png)
 
 ## Getting Started
+[//]: <> (TODO: Needs work, also attention re: CompositionRoot.Compose.)
+[//]: <> (TODO: We think NGettext does support 'domains' which is a good thing; need to verify that fact.)
+[//]: <> (TODO: Further we think that domain-based contexts should be able to support isolation, containment.)
+[//]: <> (TODO: i.e. for use cases, such as per Window/Control, enum values, etc)
+
 Get the NuGet from here <a href="https://www.nuget.org/packages/NGettext.Wpf/">https://www.nuget.org/packages/NGettext.Wpf/</a>.
 
 NGettext.Wpf is intended to work with dependency injection.  You need to call the following at the entry point of your application:
@@ -39,13 +47,15 @@ PM> msginit --input=obj\result.pot --output-file=Locale\en-GB\LC_MESSAGES\Exampl
 ---
 
 ## Conventions
+[//]: <> (Why 'Locale'? <LOCALE>? LC_MESSAGES? I think I see the historical precedent for having done that, but still...)
+
 Keep your compiled translations in `"Locale\<LOCALE>\LC_MESSAGES\<DOMAIN>.mo"`.  This library will force you to follow this convention.  Or rather, NGettext forces you to follow a convention like `"<PATH_TO_LOCALES>\<LOCALE>\LC_MESSAGES\<DOMAIN>.mo"`, and I refined it.
 
 Keep your raw translations in `"Locale\<LOCALE>\LC_MESSAGES\<DOMAIN>.po"`.  This is not enforced, but when working with POEdit it will compile the `".mo"` file into the correct location when following this convention, and it doesn't remember your previous choice, so stick with the defaults.
 
-There are lots of GNU conventions related to internationalization (i18n) and localization (l10n).  One of them is that the notion that the original program is written in US English, so you don't need to translate anything to facilitate internationalization.  The original text in US English is called the `msgId`.
+There are lots of GNU conventions related to I18N and localization (l10n).  One of them is that the notion that the original program is written in US English, so you don't need to translate anything to facilitate I18N.  The original text in US English is called the `msgId`.
 
-One of the most important GNU convention related to internationalization is providing a context to the translaters so they have a chance to do it right.  For instance the English word 'order' has a number of more or less related meanings and thus different translations.  For instance in the context of sequential ordering, 'order' translates to 'rækkefølge' in `da-DK`, but the imperative for placing an order translates to 'bestil'.  Here is an example of how that can be fixed:
+One of the most important GNU convention related to I18N is providing a context to the translaters so they have a chance to do it right.  For instance the English word 'order' has a number of more or less related meanings and thus different translations.  For instance in the context of sequential ordering, 'order' translates to 'rækkefølge' in `da-DK`, but the imperative for placing an order translates to 'bestil'.  Here is an example of how that can be fixed:
 
 ```xml
 <!-- A button with the text 'Order' but with a helpful context for the translators -->
@@ -69,6 +79,8 @@ Reach out to me at one of the following places!
 ---
 
 ## Sample Application
+[//]: <> (TODO: we can stand to think about the example, and breakout out a more 1C proper view model.)
+[//]: <> (TODO: contrasted with actual Windows INPC properties, which is kind of counter to the MVVM architecture.)
 
 In <a href="NGettext.Wpf.Example/">NGettext.Wpf.Example/</a> you will find a sample application that demonstrates all the features of this library.
 
