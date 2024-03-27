@@ -23,6 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 //// TODO: probably an artifact of JetBrains R# having been introduced
 // #pragma warning disable 1591
