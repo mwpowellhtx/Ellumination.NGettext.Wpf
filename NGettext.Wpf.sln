@@ -3,31 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf", "NGettext.Wpf.csproj", "{90D26F6E-6663-401C-AF91-E46B692FE5EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf", "NGettext.Wpf\NGettext.Wpf.csproj", "{90D26F6E-6663-401C-AF91-E46B692FE5EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{449F6D9A-A4D9-4356-B4C0-1912196C0BF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B10778D0-E677-493A-8FAC-C9FC2F54D99A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf.Example", "..\NGettext.Wpf.Example\NGettext.Wpf.Example.csproj", "{05270AF1-BF41-4AE7-AB84-9DF3EAE27077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf.Example", "NGettext.Wpf.Example\NGettext.Wpf.Example.csproj", "{05270AF1-BF41-4AE7-AB84-9DF3EAE27077}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FB6F29A5-29A2-474C-B7ED-39AAB74F60C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf.Tests", "..\NGettext.Wpf.Tests\NGettext.Wpf.Tests.csproj", "{527679B7-F06B-4133-8265-811F3355225E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf.Tests", "NGettext.Wpf.Tests\NGettext.Wpf.Tests.csproj", "{527679B7-F06B-4133-8265-811F3355225E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{38960D9D-01F2-4371-AE07-E9AA80B0E553}"
 	ProjectSection(SolutionItems) = preProject
-		..\CHANGELOG.md = ..\CHANGELOG.md
-		..\Directory.Build.props = ..\Directory.Build.props
-		..\Directory.Packages.props = ..\Directory.Packages.props
-		..\LICENSE = ..\LICENSE
-		..\NuGet.Config = ..\NuGet.Config
-		..\README.md = ..\README.md
-		..\Unit.Asserts.Testing.props = ..\Unit.Asserts.Testing.props
-		..\Unit.Testing.props = ..\Unit.Testing.props
+		CHANGELOG.md = CHANGELOG.md
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
+		NuGet.Config = NuGet.Config
+		README.md = README.md
+		Unit.Asserts.Testing.props = Unit.Asserts.Testing.props
+		Unit.Testing.props = Unit.Testing.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGettext.Wpf.Asserts", "..\NGettext.Wpf.Asserts\NGettext.Wpf.Asserts.csproj", "{F88C75A6-50AF-4A68-B119-1035A31020DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGettext.Wpf.Asserts", "NGettext.Wpf.Asserts\NGettext.Wpf.Asserts.csproj", "{F88C75A6-50AF-4A68-B119-1035A31020DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
