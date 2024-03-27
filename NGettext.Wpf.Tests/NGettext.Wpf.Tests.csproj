@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8-windows</TargetFramework>
+        <DefineConstants>TRACE;ALPHA</DefineConstants>
+        <!-- TODO: was mostly a thought experiment -->
+        <!-- TODO: we think there is value disabling #nullable and doing the reasoning work -->
+        <!--<WarningsAsErrors>CS8625</WarningsAsErrors>-->
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <AssemblyTitle>NGettext.Wpf.Tests</AssemblyTitle>
+        <Description>Project unit testing enabled by Xunit.</Description>
+        <RootNamespace>NGettext.Wpf</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <FileVersion>1.1.0.0</FileVersion>
+        <InformationalVersion>1.1.0.0</InformationalVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <Copyright>Copyright © 2017, 2024</Copyright>
+    </PropertyGroup>
+
+    <Import Project="..\Unit.Testing.props" />
+
+    <!-- TODO: this one is not part of the broader unit test properties -->
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Xunit.StaFact" Version="1.1.11" />
+        <PackageReference Include="NSubstitute" Version="5.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NGettext.Wpf\NGettext.Wpf.csproj" />
+        <ProjectReference Include="..\NGettext.Wpf.Asserts\NGettext.Wpf.Asserts.csproj" />
+    </ItemGroup>
+
+</Project>
