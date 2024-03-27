@@ -1,0 +1,24 @@
+<Project>
+
+    <!-- TODO: define nuget configuration, we want the packages to land in common solution folder -->
+    <!-- TODO: not sure the overall benefit of centralizing package version management however -->
+    <PropertyGroup>
+        <!--<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>-->
+        <!-- TODO: overall we are disabling NRT comprehension, for the moment
+            AFAIK, NG.Wpf was not designed with NRT in view at the time,
+            but there may be a place for the null safety checks here, we'll see;
+            I was curious what the scope and impact might be, so I explored the topic,
+            and there results were so-so, 50/50, but I did not pursue in any more depth than that. -->
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Product>NGettext.Wpf</Product>
+        <Copyright>Copyright © 2017-2019, 2024</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!--<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />-->
+    </ItemGroup>
+
+</Project>
