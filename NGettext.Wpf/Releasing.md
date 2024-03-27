@@ -1,7 +1,7 @@
 ﻿Releasing
 =========
 
- - Update the `.nuspec` file with a new version number.
+ - Update the `.nuspec` file with a new version number. TODO: update do not need 'nuspec' as long as appropriate csproj versioning etc is bumped
  - Build in release mode
  - Invoke `PM> nuget pack`; no options needed.  But it will release the debug version, so make sure your build configuration match! Say `PM> nuget pack -Prop Configuration=Release`.
  - Sign the created package, for example by

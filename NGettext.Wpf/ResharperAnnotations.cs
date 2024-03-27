@@ -1,4 +1,7 @@
-﻿/* MIT License
+﻿// TODO: seeing as how we do not have a current R# license
+// TODO: will need to see whether this is applicable, if so how much
+// TODO: what is it doing, and could we get licensed again somehow
+/* MIT License
 
 Copyright (c) 2016 JetBrains http://www.jetbrains.com
 
@@ -21,8 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 using System;
-
-#pragma warning disable 1591
+using System.Diagnostics.CodeAnalysis;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -33,12 +35,6 @@ using System;
 // ReSharper disable once CheckNamespace
 namespace JetBrains.Annotations
 {
-    [AttributeUsage(
-      AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-      AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event |
-      AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
-    internal sealed class NotNullAttribute : Attribute { }
-
     /// <summary>
     /// Indicates that the marked method builds string by format pattern and (optional) arguments.
     /// Parameter, which contains format string, should be given in constructor. The format string
@@ -49,7 +45,7 @@ namespace JetBrains.Annotations
     /// void ShowError(string message, params object[] args) { /* do something */ }
     ///
     /// void Foo() {
-    ///   ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
+    ///     ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
     /// }
     /// </code></example>
     [AttributeUsage(
@@ -57,14 +53,17 @@ namespace JetBrains.Annotations
       AttributeTargets.Property | AttributeTargets.Delegate, AllowMultiple = true)]
     internal sealed class StringFormatMethodAttribute : Attribute
     {
-        /// <param name="formatParameterName">
-        /// Specifies which parameter of an annotated method should be treated as format-string
-        /// </param>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="formatParameterName">Specifies which parameter of an annotated method should be treated as format-string.</param>
+#pragma warning disable IDE0290 // Use primary constructor
         public StringFormatMethodAttribute([NotNull] string formatParameterName)
         {
             FormatParameterName = formatParameterName;
         }
 
-        [NotNull] public string FormatParameterName { get; private set; }
+        [NotNull]
+        public string FormatParameterName { get; private set; }
     }
 }

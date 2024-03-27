@@ -5,29 +5,43 @@ using System.Windows.Input;
 
 namespace NGettext.Wpf
 {
+    /// <inheritdoc/>
     public class ChangeCultureCommand : ICommand
     {
-        public bool CanExecute(object parameter)
-        {
-            return CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-                .Any(cultureInfo => cultureInfo.Name == (string)parameter);
-        }
+        /// <inheritdoc/>
+        public virtual bool CanExecute(object parameter)
+            => parameter is string s
+                && CultureInfo.GetCultures(CultureTypes.SpecificCultures)
+                    .Any(cultureInfo => cultureInfo.Name == s);
 
-        public void Execute(object parameter)
+        /// <inheritdoc/>
+        public virtual void Execute(object parameter)
         {
+            // TODO: base this around the 'behavior' for best single responsibility
+            // TODO: goal also being, I think, to obviate 'CompositionRoot' being necessary
             if (CultureTracker is null)
             {
                 CompositionRoot.WriteMissingInitializationErrorMessage();
                 return;
             }
 
-            CultureTracker.CurrentCulture =
-                CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-                    .Single(cultureInfo => cultureInfo.Name == (string)parameter);
+            if (parameter is string s)
+            {
+                CultureTracker.CurrentCulture = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
+                    .Single(cultureInfo => cultureInfo.Name == s);
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+#pragma warning disable CS0067 // The event 'ChangeCultureCommand.CanExecuteChanged' is never used
         public event EventHandler CanExecuteChanged;
 
+        // TODO: can this be reduced, single responsibility (?)
+        /// <summary>
+        /// 
+        /// </summary>
         public static ICultureTracker CultureTracker { get; set; }
     }
 }

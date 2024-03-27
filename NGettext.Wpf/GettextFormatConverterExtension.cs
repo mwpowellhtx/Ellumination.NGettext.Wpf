@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Windows.Markup;
-using NGettext.Wpf.Common;
 
 namespace NGettext.Wpf
 {
+    using Common;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class GettextFormatConverterExtension : MarkupExtension
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msgId"></param>
+#pragma warning disable IDE0290 // Use primary constructor
         public GettextFormatConverterExtension(string msgId)
         {
             MsgId = msgId;
         }
 
-        [ConstructorArgument("msgId")] public string MsgId { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [ConstructorArgument("msgId")]
+        public string MsgId { get; set; }
 
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return new GettextStringFormatConverter(MsgId);
-        }
+        /// <inheritdoc/>
+        public override object ProvideValue(IServiceProvider serviceProvider) => new GettextStringFormatConverter(MsgId);
     }
 }

@@ -1,115 +1,103 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 
 namespace NGettext.Wpf
 {
-    public interface ILocalizer
+    /// <inheritdoc cref="ILocalizer" />
+    public class Localizer : ILocalizer, IDisposable
     {
-        ICatalog Catalog { get; }
-        ICultureTracker CultureTracker { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string DomainName { get; }
 
-        ICatalog GetCatalog(CultureInfo cultureInfo);
-    }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual ICultureTracker CultureTracker { get; }
 
-    public class Localizer : IDisposable, ILocalizer
-    {
-        private readonly string _domainName;
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual ICatalog Catalog { get; private set; }
 
-        public Localizer(ICultureTracker cultureTracker, string domainName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cultureTracker"></param>
+        /// <param name="domainName"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public Localizer([NotNull] ICultureTracker cultureTracker, string domainName)
         {
-            _domainName = domainName;
+            ArgumentNullException.ThrowIfNull(cultureTracker);
+            DomainName = domainName;
             CultureTracker = cultureTracker;
-            if (cultureTracker == null) throw new ArgumentNullException(nameof(cultureTracker));
-            cultureTracker.CultureChanging += ResetCatalog;
+            cultureTracker.CultureChanging += OnCultureChangingResetCatalog;
             ResetCatalog(cultureTracker.CurrentCulture);
         }
 
-        private void ResetCatalog(object sender, CultureEventArgs e)
-        {
-            ResetCatalog(e.CultureInfo);
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnCultureChangingResetCatalog(object sender, CultureEventArgs e) => ResetCatalog(e.Culture);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cultureInfo"></param>
         private void ResetCatalog(CultureInfo cultureInfo)
         {
-            Catalog = GetCatalog(cultureInfo);
+            Catalog = CreateCatalog(cultureInfo);
         }
 
-        public ICatalog GetCatalog(CultureInfo cultureInfo)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cultureInfo"></param>
+        /// <returns></returns>
+        public ICatalog CreateCatalog(CultureInfo cultureInfo)
         {
-            var localeDir = "Locale";
-            Console.WriteLine(
-                $"NGettext.Wpf: Attempting to load \"{Path.GetFullPath(Path.Combine(localeDir, cultureInfo.Name, "LC_MESSAGES", _domainName + ".mo"))}\"");
-            return new Catalog(_domainName, localeDir, cultureInfo);
+            // TODO: what is 'LC_MESSAGES' (?)
+            const string LC_MESSAGES = nameof(LC_MESSAGES);
+            // TODO: also based on 'Locale' (?)
+            const string Locale = nameof(Locale);
+            // TODO: TBD: console write lines throughout (?)
+            // TODO: TBD: would it make some sense to consider an 'ILogger' compliant approach (?)
+            // TODO: TBD: perhaps even consider something like a Serilog (?) for the same
+            Console.WriteLine($"NGettext.Wpf: Attempting to load \"{Path.GetFullPath(Path.Combine(Locale, cultureInfo.Name, LC_MESSAGES, DomainName + ".mo"))}\"");
+            return new Catalog(DomainName, Locale, cultureInfo);
         }
 
-        public ICatalog Catalog { get; private set; }
-        public ICultureTracker CultureTracker { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsDisposed { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && !IsDisposed)
+            {
+                CultureTracker.CultureChanging -= OnCultureChangingResetCatalog;
+
+                IsDisposed = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
-            CultureTracker.CultureChanging -= ResetCatalog;
-        }
-    }
-
-    public static class LocalizerExtensions
-    {
-        internal struct MsgIdWithContext
-        {
-            internal string Context { get; set; }
-            internal string MsgId { get; set; }
-        }
-
-        internal static MsgIdWithContext ConvertToMsgIdWithContext(string msgId)
-        {
-            var result = new MsgIdWithContext { MsgId = msgId };
-
-            if (msgId.Contains("|"))
-            {
-                var pipePosition = msgId.IndexOf('|');
-                result.Context = msgId.Substring(0, pipePosition);
-                result.MsgId = msgId.Substring(pipePosition + 1);
-            }
-
-            return result;
-        }
-
-        internal static string Gettext(this ILocalizer @this, string msgId, params object[] values)
-        {
-            if (msgId is null) return null;
-
-            var msgIdWithContext = ConvertToMsgIdWithContext(msgId);
-
-            if (@this is null)
-            {
-                CompositionRoot.WriteMissingInitializationErrorMessage();
-                return string.Format(msgIdWithContext.MsgId, values);
-            }
-
-            if (msgIdWithContext.Context != null)
-            {
-                return @this.Catalog.GetParticularString(msgIdWithContext.Context, msgIdWithContext.MsgId, values);
-            }
-            return @this.Catalog.GetString(msgIdWithContext.MsgId, values);
-        }
-
-        internal static string Gettext(this ILocalizer @this, string msgId)
-        {
-            if (msgId is null) return null;
-
-            var msgIdWithContext = ConvertToMsgIdWithContext(msgId);
-
-            if (@this is null)
-            {
-                CompositionRoot.WriteMissingInitializationErrorMessage();
-                return msgIdWithContext.MsgId;
-            }
-
-            if (msgIdWithContext.Context != null)
-            {
-                return @this.Catalog.GetParticularString(msgIdWithContext.Context, msgIdWithContext.MsgId);
-            }
-            return @this.Catalog.GetString(msgIdWithContext.MsgId);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -1,10 +1,15 @@
-﻿namespace NGettext.Wpf
+﻿// TODO: again re: 'composition roots', "DI" at this level seems a bit like overkill to me
+namespace NGettext.Wpf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NGettextWpfDependencyResolver
     {
-        public virtual ICultureTracker ResolveCultureTracker()
-        {
-            return new CultureTracker();
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public virtual ICultureTracker ResolveCultureTracker() => new CultureTracker();
     }
 }

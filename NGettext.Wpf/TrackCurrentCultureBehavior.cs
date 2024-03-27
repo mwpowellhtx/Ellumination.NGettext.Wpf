@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Markup;
-using System.Windows.Interactivity;
+using Microsoft.Xaml.Behaviors;
 
 namespace NGettext.Wpf
 {
@@ -16,11 +14,17 @@ namespace NGettext.Wpf
     /// </summary>
     public class TrackCurrentCultureBehavior : Behavior<FrameworkElement>, IWeakCultureObserver
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static ICultureTracker CultureTracker { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnAttached()
         {
-            if (!DesignerProperties.GetIsInDesignMode(AssociatedObject))
+            if (!AssociatedObject.IsInDesignMode())
             {
                 if (CultureTracker is null)
                 {
@@ -34,15 +38,26 @@ namespace NGettext.Wpf
             base.OnAttached();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateAssociatedObjectCulture()
         {
-            if (AssociatedObject is null) return;
-            AssociatedObject.Language = XmlLanguage.GetLanguage(CultureTracker.CurrentCulture.IetfLanguageTag);
+            if (AssociatedObject is not null)
+            {
+                var language = XmlLanguage.GetLanguage(CultureTracker?.CurrentCulture.IetfLanguageTag);
+                AssociatedObject.Language = language;
+            }
         }
 
-        public void HandleCultureChanged(ICultureTracker sender, CultureEventArgs eventArgs)
-        {
-            UpdateAssociatedObjectCulture();
-        }
+        // TODO: "handle" culture changed? "on culture changed" (?)
+        // TODO: what about a proper event EH, or even community toolkit messaging receipient (?)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        public void ChangeCulture(ICultureTracker sender, CultureEventArgs eventArgs)
+            => UpdateAssociatedObjectCulture();
     }
 }

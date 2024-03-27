@@ -1,16 +1,28 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace NGettext.Wpf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CultureEventArgs : EventArgs
     {
-        public CultureEventArgs(CultureInfo cultureInfo)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="culture"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public CultureEventArgs([NotNull] CultureInfo culture)
         {
-            if (cultureInfo == null) throw new ArgumentNullException(nameof(cultureInfo));
-            CultureInfo = cultureInfo;
+            ArgumentNullException.ThrowIfNull(culture);
+            Culture = culture;
         }
 
-        public CultureInfo CultureInfo { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public CultureInfo Culture { get; }
     }
 }
