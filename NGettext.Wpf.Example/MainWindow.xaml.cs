@@ -10,13 +10,35 @@ using System.Windows.Threading;
 
 namespace NGettext.Wpf.Example
 {
-    public partial class MainWindow : INotifyPropertyChanged
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private int _memoryLeakTestProgress;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private DateTime _currentTime;
-        private readonly string _someDeferredLocalization = Translation.Noop("Deferred localization");
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly string _someDeferredLocalization = Localization.Noop("Deferred localization");
+
+        /// <summary>
+        /// 
+        /// </summary>
         private int _counter;
 
+        // TODO: need to sub in 'behaviors' for expression blend deps
+        /// <summary>
+        /// 
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -27,8 +49,14 @@ namespace NGettext.Wpf.Example
             timer.Start();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal SomeNumber => 1234567.89m;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime CurrentTime
         {
             get => _currentTime;
@@ -39,6 +67,11 @@ namespace NGettext.Wpf.Example
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OpenMemoryLeakTestWindow(object sender, RoutedEventArgs e)
         {
             var leakTestWindowReference = GetWeakReferenceToLeakTestWindow();
@@ -51,6 +84,10 @@ namespace NGettext.Wpf.Example
             Debug.Assert(!leakTestWindowReference.TryGetTarget(out _), "memory leak detected");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private WeakReference<MemoryLeakTestWindow> GetWeakReferenceToLeakTestWindow()
         {
             var window = new MemoryLeakTestWindow();
@@ -78,6 +115,9 @@ namespace NGettext.Wpf.Example
             return new WeakReference<MemoryLeakTestWindow>(window);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int MemoryLeakTestProgress
         {
             get => _memoryLeakTestProgress;
@@ -88,20 +128,46 @@ namespace NGettext.Wpf.Example
             }
         }
 
+        // TODO: surely also there are 'better' ways of doing this
+        // TODO: migrate into our baked in enum view models
         public ICollection<ExampleEnum> EnumValues { get; } = Enum.GetValues(typeof(ExampleEnum)).Cast<ExampleEnum>().ToList();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string SomeDeferredLocalization => Translation._(_someDeferredLocalization);
+        // TODO: rather like the '_' method naming convention
+        // TODO: somewhat in keeping with the underpinning NGettext approach as well
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SomeDeferredLocalization => Localization._(_someDeferredLocalization);
 
-        public string Header => Translation._("NGettext.WPF Example");
+        // TODO: which and if we are listening/tracking for culture changes...
+        // TODO: then do we not also have to notify "Header" and the other props as well (?)
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Header => Localization._("NGettext.WPF Example");
 
-        public string PluralGettext => Translation.PluralGettext(1, "Singular", "Plural") +
-                                       "---" + Translation.PluralGettext(2, "Singular", "Plural");
+        // TODO: what is the argument list migration path
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PluralGettext => Localization.PluralGettext(1, "Singular", "Plural") +
+                                       "---" + Localization.PluralGettext(2, "Singular", "Plural");
 
-        public string PluralGettextParams => Translation.PluralGettext(1, "Singular {0:n3}", "Plural {0:n3}", 1m / 3m) +
-                                             "---" + Translation.PluralGettext(2, "Singular {0:n3}", "Plural {0:n3}", 1m / 3m);
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PluralGettextParams => Localization.PluralGettext(1, "Singular {0:n3}", "Plural {0:n3}", 1m / 3m) +
+                                             "---" + Localization.PluralGettext(2, "Singular {0:n3}", "Plural {0:n3}", 1m / 3m);
 
+        // TODO: notifying properties on the window itself, not great MVVM form, IMO
+        /// <summary>
+        /// 
+        /// </summary>
         public int Counter
         {
             get => _counter;

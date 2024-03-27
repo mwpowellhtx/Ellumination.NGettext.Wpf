@@ -3,23 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:wpf="clr-namespace:NGettext.Wpf;assembly=NGettext.Wpf"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:enumTranslation="clr-namespace:NGettext.Wpf.EnumTranslation;assembly=NGettext.Wpf"
+        xmlns:en="clr-namespace:NGettext.Wpf.EnumLocalization;assembly=NGettext.Wpf"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         SizeToContent="Height"
         Title="{Binding ElementName=Window, Path=Header}"
         mc:Ignorable="d" Width="525" x:Name="Window">
     <Window.Resources>
         <!-- The following ensures all enum values are translated when displayed -->
-        <enumTranslation:LocalizeEnumConverter x:Key="LocalizeEnumConverter" />
+        <en:LocalizeEnumConverter x:Key="LocalizeEnumConverter" />
+        <!-- TODO: hmm okay data templates, 'maybe' we could do it this way, if this is all we were talking about -->
+        <!-- TODO: still rather like wrapping a view model around a DisplayAttribute L10N adapter -->
         <DataTemplate DataType="{x:Type system:Enum}">
             <TextBlock Text="{Binding Converter={StaticResource LocalizeEnumConverter}}" />
         </DataTemplate>
     </Window.Resources>
-    <i:Interaction.Behaviors>
+    <behaviors:Interaction.Behaviors>
         <wpf:TrackCurrentCultureBehavior />
-    </i:Interaction.Behaviors>
+    </behaviors:Interaction.Behaviors>
     <StackPanel Orientation="Vertical">
         <StackPanel.Resources>
             <Style TargetType="Button">
@@ -58,14 +60,14 @@
             <TextBlock Text="{Binding SomeDeferredLocalization, ElementName=Window, Mode=OneWay}" Width="220" />
         </StackPanel>
         <TextBlock Text="{wpf:Gettext Varying case example:}" HorizontalAlignment="Center" />
-        <TextBlock Text="{wpf:Gettext Varying cAsE ExamPle:}"  HorizontalAlignment="Center" />
+        <TextBlock Text="{wpf:Gettext Varying cAsE ExamPle:}" HorizontalAlignment="Center" />
         <TextBlock Text="{Binding PluralGettext, ElementName=Window, Mode=OneWay}" HorizontalAlignment="Center" />
         <TextBlock Text="{Binding PluralGettextParams, ElementName=Window, Mode=OneWay}" HorizontalAlignment="Center" />
         <!-- Note that escaped single-quotes are not supported by the VS designer at the time of writing -->
-        <!--<TextBlock Text="{wpf:Gettext 'Enclosing single-quotes (\') are optional'}"  HorizontalAlignment="Center" />-->
-        <TextBlock Text="{wpf:Gettext 'Enclosing single-quotes (apostrophes) are optional.'}"  HorizontalAlignment="Center" />
-        <TextBlock Text="{wpf:Gettext Unenclosed escaped single-quotes (\') are supported.}"  HorizontalAlignment="Center" />
-        <TextBlock Text="{wpf:Gettext Unicode™ in msgIds is supported}"  HorizontalAlignment="Center" />
+        <!--<TextBlock Text="{wpf:Gettext 'Enclosing single-quotes (\') are optional'}" HorizontalAlignment="Center" />-->
+        <TextBlock Text="{wpf:Gettext 'Enclosing single-quotes (apostrophes) are optional.'}" HorizontalAlignment="Center" />
+        <TextBlock Text="{wpf:Gettext Unenclosed escaped single-quotes (\') are supported.}" HorizontalAlignment="Center" />
+        <TextBlock Text="{wpf:Gettext Unicode™ in msgIds is supported}" HorizontalAlignment="Center" />
         <TextBlock Text="{wpf:Gettext Example|GNOME glib syntax context example}" HorizontalAlignment="Center" />
         <TextBlock Text="{wpf:Gettext Text with punctuation: 1\, 2\, 3}" HorizontalAlignment="Center" />
         <TextBlock Text="{Binding Path=Counter,ElementName=Window, Converter={wpf:GettextFormatConverter Binding string format support: {0:n0}}}" HorizontalAlignment="Center" />

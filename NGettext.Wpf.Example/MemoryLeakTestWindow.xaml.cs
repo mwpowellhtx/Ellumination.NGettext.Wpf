@@ -2,8 +2,12 @@
 
 namespace NGettext.Wpf.Example
 {
-    public partial class MemoryLeakTestWindow
+    /// <inheritdoc/>
+    public partial class MemoryLeakTestWindow : Window
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public MemoryLeakTestWindow()
         {
             InitializeComponent();
