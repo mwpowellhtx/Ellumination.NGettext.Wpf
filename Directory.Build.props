@@ -15,7 +15,7 @@
     <PropertyGroup>
         <Authors>Ellumination Technologies</Authors>
         <Company>Ellumination Technologies</Company>
-        <Product>NGettext.Wpf</Product>
+        <Product>Ellumination.NGettext.Wpf</Product>
         <Copyright>Copyright © 2017-2019, 2024</Copyright>
     </PropertyGroup>
 
