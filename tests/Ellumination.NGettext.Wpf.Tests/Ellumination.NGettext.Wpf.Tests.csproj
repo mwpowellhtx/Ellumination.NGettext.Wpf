@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <AssemblyTitle>NGettext.Wpf.Tests</AssemblyTitle>
+        <AssemblyTitle>Ellumination.NGettext.Wpf.Tests</AssemblyTitle>
         <Description>Project unit testing enabled by Xunit.</Description>
         <RootNamespace>NGettext.Wpf</RootNamespace>
     </PropertyGroup>
@@ -31,8 +31,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\NGettext.Wpf\NGettext.Wpf.csproj" />
-        <ProjectReference Include="..\NGettext.Wpf.Asserts\NGettext.Wpf.Asserts.csproj" />
+        <ProjectReference Include="..\..\src\Ellumination.NGettext.Wpf\Ellumination.NGettext.Wpf.csproj" />
+        <ProjectReference Include="..\Ellumination.NGettext.Wpf.Asserts\Ellumination.NGettext.Wpf.Asserts.csproj" />
     </ItemGroup>
 
 </Project>
