@@ -34,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\NGettext.Wpf\NGettext.Wpf.csproj" />
+        <ProjectReference Include="..\..\src\Ellumination.NGettext.Wpf\Ellumination.NGettext.Wpf.csproj" />
     </ItemGroup>
 
     <ItemGroup>
