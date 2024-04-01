@@ -3,23 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf", "NGettext.Wpf\NGettext.Wpf.csproj", "{90D26F6E-6663-401C-AF91-E46B692FE5EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ellumination.NGettext.Wpf", "Ellumination.NGettext.Wpf\Ellumination.NGettext.Wpf.csproj", "{90D26F6E-6663-401C-AF91-E46B692FE5EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{449F6D9A-A4D9-4356-B4C0-1912196C0BF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B10778D0-E677-493A-8FAC-C9FC2F54D99A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf.Example", "..\examples\NGettext.Wpf.Example\NGettext.Wpf.Example.csproj", "{05270AF1-BF41-4AE7-AB84-9DF3EAE27077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ellumination.NGettext.Wpf.Example", "..\examples\Ellumination.NGettext.Wpf.Example\Ellumination.NGettext.Wpf.Example.csproj", "{05270AF1-BF41-4AE7-AB84-9DF3EAE27077}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FB6F29A5-29A2-474C-B7ED-39AAB74F60C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf.Asserts", "..\tests\NGettext.Wpf.Asserts\NGettext.Wpf.Asserts.csproj", "{F88C75A6-50AF-4A68-B119-1035A31020DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ellumination.NGettext.Wpf.Asserts", "..\tests\Ellumination.NGettext.Wpf.Asserts\Ellumination.NGettext.Wpf.Asserts.csproj", "{F88C75A6-50AF-4A68-B119-1035A31020DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGettext.Wpf.Tests", "..\tests\NGettext.Wpf.Tests\NGettext.Wpf.Tests.csproj", "{527679B7-F06B-4133-8265-811F3355225E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ellumination.NGettext.Wpf.Tests", "..\tests\Ellumination.NGettext.Wpf.Tests\Ellumination.NGettext.Wpf.Tests.csproj", "{527679B7-F06B-4133-8265-811F3355225E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{38960D9D-01F2-4371-AE07-E9AA80B0E553}"
 	ProjectSection(SolutionItems) = preProject
 		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\Directory.Build.props = ..\Directory.Build.props
 		..\LICENSE = ..\LICENSE
 		..\NuGet.Config = ..\NuGet.Config
 		..\README.md = ..\README.md
@@ -40,6 +41,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{0FDAB6
 		..\tests\Directory.Build.props = ..\tests\Directory.Build.props
 		..\tests\Unit.Asserts.Testing.props = ..\tests\Unit.Asserts.Testing.props
 		..\tests\Unit.Testing.props = ..\tests\Unit.Testing.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XGetText.Xaml", "XGetText.Xaml", "{09ABC772-45BD-441E-BBE0-F797718AACD4}"
+	ProjectSection(SolutionItems) = preProject
+		XGetText.Xaml\Init.ps1 = XGetText.Xaml\Init.ps1
+		XGetText.Xaml\XGetText-Xaml.ps1 = XGetText.Xaml\XGetText-Xaml.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XGetText.Xaml.Tests", "XGetText.Xaml.Tests", "{663E8981-0DBC-4D52-86D4-84F6E5FC8E8D}"
+	ProjectSection(SolutionItems) = preProject
+		XGetText.Xaml\README.md = XGetText.Xaml\README.md
+		XGetText.Xaml\XGetText-Xaml.Tests.ps1 = XGetText.Xaml\XGetText-Xaml.Tests.ps1
 	EndProjectSection
 EndProject
 Global
@@ -76,6 +89,8 @@ Global
 		{25E16DE1-3D06-4F01-936B-F567935A1651} = {38960D9D-01F2-4371-AE07-E9AA80B0E553}
 		{01078C95-11B6-499D-B7BA-C044FEAA1F19} = {38960D9D-01F2-4371-AE07-E9AA80B0E553}
 		{0FDAB672-61E3-437C-B6A0-2E55CAE1AAFE} = {38960D9D-01F2-4371-AE07-E9AA80B0E553}
+		{09ABC772-45BD-441E-BBE0-F797718AACD4} = {449F6D9A-A4D9-4356-B4C0-1912196C0BF6}
+		{663E8981-0DBC-4D52-86D4-84F6E5FC8E8D} = {FB6F29A5-29A2-474C-B7ED-39AAB74F60C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6589CA7B-EE66-4593-A310-CFDC0A141965}
