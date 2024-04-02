@@ -25,7 +25,7 @@ Find the [NuGet package](https://www.nuget.org/packages/Ellumination.NGettext.Wp
 NGettext.Wpf.CompositionRoot.Compose("ExampleDomainName");
 ```
 
-The `"ExampleDomainName"` string is the domain name. This means that, when the current culture is set to `"da-DK"`, localization shall occur from `"Locale\da-DK\LC_MESSAGES\ExampleDomainName.mo"`, relative to where your WPF application is running. You must include the corresponding [`.mo`](https://file.org/extension/mo) files in your application, ensuring that they are copied to the output directory.
+The `"ExampleDomainName"` string is the domain name. This means that, when the current culture is set to `"da-DK"`, localization shall occur from `Locale\da-DK\LC_MESSAGES\ExampleDomainName.mo`, relative to where your WPF application is running. You must include the corresponding [`.mo`](https://file.org/extension/mo) files in your application, ensuring that they are copied to the output directory.
 
 Now you can do something like this in XAML:
 
@@ -54,9 +54,9 @@ PM> msginit --input=obj\result.pot --output-file=Locale\en-GB\LC_MESSAGES\Exampl
 [//]: <> (Why 'Locale'? <LOCALE>? LC_MESSAGES? I think I see the historical precedent for having done that, but still...)
 
 <!-- TODO: not so much any more, I think there is an opportunity to convey a Stream which may generally locate assets 'anywhere' other than the legacy 'LC_MESSAGES' -->
-Keep your compiled localizations in `"Locale\<LOCALE>\LC_MESSAGES\<DOMAIN>.mo"`. This library will force you to follow this convention. Or rather, NGettext forces you to follow a convention like `"<PATH_TO_LOCALES>\<LOCALE>\LC_MESSAGES\<DOMAIN>.mo"`, and I refined it.
+Keep your compiled localizations in `Locale\<LOCALE>\LC_MESSAGES\<DOMAIN>.mo`. This library will force you to follow this convention. Or rather, NGettext forces you to follow a convention like `"<PATH_TO_LOCALES>\<LOCALE>\LC_MESSAGES\<DOMAIN>.mo"`, and I refined it.
 
-Keep your raw localizations in `"Locale\<LOCALE>\LC_MESSAGES\<DOMAIN>.po"`. This is not enforced, but when working with `PoEdit`, it will compile the `.mo` file into the correct location when following this convention, and it does not remember your previous choice, so stick with the defaults.
+Keep your raw localizations in `Locale\<LOCALE>\LC_MESSAGES\<DOMAIN>.po`. This is not enforced, but when working with `PoEdit`, it will compile the `.mo` file into the correct location when following this convention, and it does not remember your previous choice, so stick with the defaults.
 
 There are lots of GNU conventions related to I18N and _localization_ (L10N). One of them is the notion that the original program is written in US English, so you do not need to translate anything to facilitate I18N. The original text in US English is called the `msgId`.
 
@@ -77,13 +77,13 @@ Interpreters will rarely think of it, and just translate the first meaning that 
 
 Have a question, want to participate, you get out of it what you contribute:
 
-- By participating in the [project discussions](discussions)
+- By participating in the [project discussions](https://github.com/mwpowellhtx/Ellumination.NGettext.Wpf/discussions)
 - By connecting with me on [Github](https://github.com/mwpowellhtx), following my work
 - By contacting me on [Gab](https://gab.com/michaelwplde), where you may reach me, primarily
 - By following my [Twitter](https://twitter.com/Michael88973702) feed; although I do not use this for contact
 - By networking with me via [LinkedIn](https://linkedin.com/in/mwpowellhtx72), always interested in solid business leads
 - By [asking a StackOverflow question](https://stackoverflow.com/questions/ask?tags=ngettext.wpf), and by including at least the annotated tags
-- Or, by [opening a project issue](issues)
+- Or, by [opening a project issue](https://github.com/mwpowellhtx/Ellumination.NGettext.Wpf/issues)
 
 ---
 
